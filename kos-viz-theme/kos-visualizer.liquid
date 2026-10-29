@@ -1,0 +1,35 @@
+{%- comment -%} KOS color visualizer (DRAFT). Add a product with: when 'handle' -> assign vk = 'key' and upload assets kos-viz-KEY-base.jpg / kos-viz-KEY-mask.png {%- endcomment -%}
+{%- assign vk = '' -%}{%- assign vcap = '' -%}
+{%- case product.handle -%}
+{%- when 'cal-flame-carmel-q-870-bbq-island' -%}{%- assign vk = 'carmel' -%}
+{%- when 'cal-flame-kona-q-601-bbq-island' -%}{%- assign vk = 'kona' -%}
+{%- when 'cal-flame-pacifica-q-701-bbq-island' -%}{%- assign vk = 'pacifica' -%}{%- assign vcap = 'Shown with the optional refrigerator (select the Grill & Fridge option that includes it). ' -%}
+{%- when 'cal-flame-kauai-q-402-bbq-island' -%}{%- assign vk = 'kauai' -%}
+{%- when 'cal-flame-costa-q-pv6004-bbq-island' -%}{%- assign vk = 'costa' -%}{%- assign vcap = 'Shown with the optional refrigerator (select the Grill & Fridge option that includes it). ' -%}
+{%- when 'cal-flame-baja-q-710-bbq-island' -%}{%- assign vk = 'baja' -%}{%- assign vcap = 'Shown with the optional refrigerator (select the Grill & Fridge option that includes it). ' -%}
+{%- when 'cal-flame-tropical-q-pv6016-bbq-island' -%}{%- assign vk = 'tropical' -%}{%- assign vcap = 'Shown with the optional refrigerator (select the Grill & Fridge option that includes it). ' -%}
+{%- when 'cal-flame-atlantic-q-801-bbq-island' or 'cal-flame-bel-air-q-810-bbq-island' -%}{%- assign vk = 'atlantic' -%}{%- assign vcap = 'Shown with the optional refrigerator (select the Grill & Fridge option that includes it). ' -%}
+{%- when 'cal-flame-maui-q-401-r-bbq-island' -%}{%- assign vk = 'maui' -%}
+{%- when 'cal-flame-avalon-q-820-r-bbq-island' -%}{%- assign vk = 'avalon' -%}{%- assign vcap = 'Shown with the optional refrigerator (select the Grill & Fridge option that includes it). ' -%}
+{%- when 'cal-flame-malibu-q-830-r-bbq-island' -%}{%- assign vk = 'malibu' -%}{%- assign vcap = 'Shown with the optional refrigerator (select the Grill & Fridge option that includes it). ' -%}
+{%- when 'cal-flame-la-jolla-q-pv7000-bbq-island' -%}{%- assign vk = 'lajolla' -%}{%- assign vcap = 'Shown with the optional side burner and refrigerator (select the Grill & Extras option that includes them). ' -%}
+{%- when 'cal-flame-laguna-q-gpv3100-bbq-island' -%}{%- assign vk = 'laguna' -%}{%- assign vcap = 'Shown with the optional sink, side burner and refrigerator (select the Grill & Extras option that includes them). ' -%}
+{%- endcase -%}
+{%- if vk != '' -%}
+{%- capture vbase -%}kos-viz-{{ vk }}-base.jpg{%- endcapture -%}
+{%- capture vmask -%}kos-viz-{{ vk }}-mask.png{%- endcapture -%}
+<div class="kos-viz" data-kos-viz data-base="{{ vbase | asset_url }}" data-mask="{{ vmask | asset_url }}">
+  <canvas class="kos-viz__canvas" width="1400" height="933" aria-label="Concept rendering of the island in your selected colors"></canvas>
+  <div class="kos-viz__note">{{ vcap }}Concept rendering &mdash; colors on screen are approximate. Call us to confirm your selections.</div>
+</div>
+<style>
+.kos-viz{margin:16px 0}
+.kos-viz__canvas{width:100%;height:auto;display:block;border-radius:6px;background:#eee}
+.kos-viz__note{font-size:.8em;color:#666;margin-top:6px}
+.kos-viz__tabs{display:flex;gap:8px;margin-bottom:10px}
+.kos-viz__tab{padding:8px 14px;border:1px solid #ccc;border-radius:20px;background:#fff;cursor:pointer;font-size:.9em}
+.kos-viz__tab.is-on{background:#1d1d1d;color:#fff;border-color:#1d1d1d}
+.kos-viz.is-moved{position:sticky;top:90px;z-index:2;background:#fff;margin:0 0 16px}
+</style>
+<script src="{{ 'kos-viz.js' | asset_url }}"></script>
+{%- endif -%}
